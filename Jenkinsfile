@@ -141,8 +141,14 @@ pipeline {
             echo '❌ Pipeline failed. Check the logs above.'
         }
         always {
-            echo '🧹 Cleaning up workspace …'
-            cleanWs(deleteDirs: true, patterns: [[pattern: '.venv/**', type: 'INCLUDE']])
+            echo 'Pipeline execution complete.'
+            script {
+                try {
+                    cleanWs(deleteDirs: true, patterns: [[pattern: '.venv/**', type: 'INCLUDE']])
+                } catch (Exception e) {
+                    echo 'Workspace cleanup step skipped (ws-cleanup plugin optional).'
+                }
+            }
         }
     }
 }
