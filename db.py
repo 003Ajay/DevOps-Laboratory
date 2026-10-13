@@ -12,7 +12,11 @@ import sqlite3
 # Configuration
 # ---------------------------------------------------------------------------
 
-DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "instance", "shop.db")
+DEFAULT_DB_PATH = (
+    "/tmp/shop.db"
+    if (os.environ.get("VERCEL") or os.environ.get("AWS_LAMBDA_FUNCTION_NAME"))
+    else os.path.join(os.path.dirname(__file__), "instance", "shop.db")
+)
 DB_PATH = os.environ.get("DB_PATH", DEFAULT_DB_PATH)
 
 
@@ -150,4 +154,15 @@ def seed_products(db_path=None):
             SAMPLE_PRODUCTS,
         )
         conn.commit()
+
+    # Also seed initial admin account if none exists
+    admin_count = conn.execute("SELECT COUNT(*) FROM admin_users").fetchone()[0]
+    if admin_count == 0:
+        from werkzeug.security import generate_password_hash
+        conn.execute(
+            "INSERT INTO admin_users (username, password_hash) VALUES (?, ?)",
+            ("admin", generate_password_hash("adminpass123")),
+        )
+        conn.commit()
+
     conn.close()
