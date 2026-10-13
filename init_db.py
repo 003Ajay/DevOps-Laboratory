@@ -15,19 +15,25 @@ from werkzeug.security import generate_password_hash
 from db import get_connection, init_db, seed_products
 
 
-def create_admin(db_path=None):
-    """Interactively create an admin user."""
-    username = input("Admin username: ").strip()
+def create_admin(username=None, password=None, db_path=None):
+    """Create an admin user interactively or via arguments."""
+    if not username:
+        username = input("Admin username: ").strip()
     if not username:
         print("Username cannot be empty.")
         sys.exit(1)
-    password = getpass.getpass("Admin password: ")
-    if len(password) < 6:
+
+    if not password:
+        password = getpass.getpass("Admin password: ")
+        if len(password) < 6:
+            print("Password must be at least 6 characters.")
+            sys.exit(1)
+        confirm = getpass.getpass("Confirm password: ")
+        if password != confirm:
+            print("Passwords do not match.")
+            sys.exit(1)
+    elif len(password) < 6:
         print("Password must be at least 6 characters.")
-        sys.exit(1)
-    confirm = getpass.getpass("Confirm password: ")
-    if password != confirm:
-        print("Passwords do not match.")
         sys.exit(1)
 
     conn = get_connection(db_path)
@@ -53,7 +59,19 @@ def main():
     parser.add_argument(
         "--create-admin",
         action="store_true",
-        help="Create an admin user interactively after initialisation",
+        help="Create an admin user after initialisation",
+    )
+    parser.add_argument(
+        "--username",
+        type=str,
+        default=None,
+        help="Admin username (optional, prompts if omitted)",
+    )
+    parser.add_argument(
+        "--password",
+        type=str,
+        default=None,
+        help="Admin password (optional, prompts if omitted)",
     )
     args = parser.parse_args()
 
@@ -64,7 +82,7 @@ def main():
     print("Database ready.")
 
     if args.create_admin:
-        create_admin()
+        create_admin(username=args.username, password=args.password)
 
 
 if __name__ == "__main__":
