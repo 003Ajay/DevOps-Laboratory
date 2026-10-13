@@ -1,0 +1,5 @@
+flask==3.1.*
+gunicorn==23.*
+werkzeug==3.1.*
+pytest==8.*
+flake8==7.*

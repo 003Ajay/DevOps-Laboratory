@@ -1,0 +1,4 @@
+/* This directory stores product images.
+   Place product images here with filenames matching the `image` column
+   in the products table (e.g. headphones.jpg, tshirt.jpg, etc.).
+   If an image is missing, the site falls back to a placeholder. */

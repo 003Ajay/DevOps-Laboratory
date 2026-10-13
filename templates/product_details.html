@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}{{ product['name'] }} – ShopEase{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ url_for('index') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ url_for('products') }}">Products</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ product['name'] }}</li>
+    </ol>
+</nav>
+
+<div class="row g-5">
+    <div class="col-md-5">
+        <div class="product-detail-img-wrapper rounded-3 overflow-hidden bg-light">
+            <img src="{{ url_for('static', filename='images/' + product['image']) }}"
+                 class="img-fluid w-100" alt="{{ product['name'] }}"
+                 onerror="this.onerror=null;this.src='https://placehold.co/500x400/e9ecef/495057?text={{ product['name']|urlencode }}';">
+        </div>
+    </div>
+    <div class="col-md-7">
+        <span class="badge bg-light text-secondary mb-2 text-capitalize">{{ product['category'] }}</span>
+        <h1 class="h2 mb-3">{{ product['name'] }}</h1>
+        <p class="text-primary fw-bold display-6 mb-3">{{ product['price']|rupees }}</p>
+        <p class="text-muted mb-4">{{ product['description'] }}</p>
+
+        <div class="mb-4">
+            {% if product['stock'] > 0 and product['available'] %}
+            <span class="badge bg-success-subtle text-success fs-6">
+                <i class="bi bi-check-circle me-1"></i>In Stock ({{ product['stock'] }} available)
+            </span>
+            {% else %}
+            <span class="badge bg-danger-subtle text-danger fs-6">
+                <i class="bi bi-x-circle me-1"></i>Out of Stock
+            </span>
+            {% endif %}
+        </div>
+
+        {% if product['stock'] > 0 and product['available'] %}
+        <form method="post" action="{{ url_for('cart_add', product_id=product['id']) }}">
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="bi bi-cart-plus me-2"></i>Add to Cart
+            </button>
+        </form>
+        {% else %}
+        <button class="btn btn-secondary btn-lg" disabled>Out of Stock</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Checkout – ShopEase{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-7">
+        <h1 class="h3 mb-4"><i class="bi bi-lock me-2"></i>Checkout</h1>
+
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-4">
+                <h5 class="mb-3">Delivery Information</h5>
+                <form method="post" action="{{ url_for('checkout') }}" novalidate>
+                    <div class="mb-3">
+                        <label for="customer_name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="customer_name" name="customer_name"
+                               placeholder="e.g. Rahul Sharma" required minlength="2"
+                               value="{{ request.form.get('customer_name', '') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" id="phone" name="phone"
+                               placeholder="e.g. 9876543210" required
+                               value="{{ request.form.get('phone', '') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Delivery Address <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="address" name="address" rows="3"
+                                  placeholder="Full delivery address" required minlength="5">{{ request.form.get('address', '') }}</textarea>
+                    </div>
+                    <hr class="my-4">
+                    <button type="submit" class="btn btn-primary btn-lg w-100">
+                        <i class="bi bi-check-circle me-2"></i>Place Order
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('cart') }}" class="text-muted small">
+                <i class="bi bi-arrow-left me-1"></i>Back to Cart
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
