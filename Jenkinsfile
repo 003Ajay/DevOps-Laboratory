@@ -25,6 +25,7 @@ pipeline {
     agent any
 
     environment {
+        PATH = "C:\\Users\\ajaya\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\Git\\cmd;C:\\Windows\\System32;${env.PATH}"
         IMAGE_NAME  = 'shopease'
         IMAGE_TAG   = "${BUILD_NUMBER}"
         CONTAINER   = 'shopease-web'
@@ -50,9 +51,9 @@ pipeline {
                 echo '🐍 Setting up Python virtual environment …'
                 bat '''
                     python -m venv .venv
-                    call .venv\\Scripts\\activate
-                    pip install --upgrade pip
-                    pip install -r requirements.txt
+                    call .venv\\Scripts\\activate.bat
+                    python -m pip install --upgrade pip
+                    python -m pip install -r requirements.txt
                 '''
             }
         }
@@ -64,7 +65,7 @@ pipeline {
             steps {
                 echo '🔍 Running flake8 linting …'
                 bat '''
-                    call .venv\\Scripts\\activate
+                    call .venv\\Scripts\\activate.bat
                     flake8 app.py db.py init_db.py --max-line-length=120 --count --show-source --statistics || exit 0
                 '''
             }
@@ -77,7 +78,7 @@ pipeline {
             steps {
                 echo '🧪 Running pytest …'
                 bat '''
-                    call .venv\\Scripts\\activate
+                    call .venv\\Scripts\\activate.bat
                     if not exist reports mkdir reports
                     pytest
                 '''
@@ -108,12 +109,7 @@ pipeline {
                 bat '''
                     docker stop %CONTAINER% 2>nul || echo Container was not running.
                     docker rm   %CONTAINER% 2>nul || echo No old container to remove.
-                    docker run -d --name %CONTAINER% ^
-                        -p 5000:5000 ^
-                        -v shopease-data:/data ^
-                        -e SECRET_KEY=jenkins-demo-key ^
-                        -e DB_PATH=/data/shop.db ^
-                        %IMAGE_NAME%:latest
+                    docker run -d --name %CONTAINER% -p 5000:5000 -v shopease-data:/data -e SECRET_KEY=jenkins-demo-key -e DB_PATH=/data/shop.db %IMAGE_NAME%:latest
                 '''
             }
         }
