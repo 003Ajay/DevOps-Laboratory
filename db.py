@@ -54,7 +54,7 @@ SAMPLE_PRODUCTS = [
         "description": "Premium over-ear wireless headphones with active noise cancellation and 30-hour battery life.",
         "price": 249900,       # ₹2,499.00
         "category": "electronics",
-        "image": "headphones.jpg",
+        "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
         "stock": 25,
         "available": 1,
     },
@@ -63,7 +63,7 @@ SAMPLE_PRODUCTS = [
         "description": "Adjustable aluminium desk stand compatible with all smartphones and small tablets.",
         "price": 79900,        # ₹799.00
         "category": "accessories",
-        "image": "phone_stand.jpg",
+        "image": "https://images.unsplash.com/photo-1586105251261-72a756497a11?w=600&auto=format&fit=crop&q=80",
         "stock": 50,
         "available": 1,
     },
@@ -72,7 +72,7 @@ SAMPLE_PRODUCTS = [
         "description": "Classic-fit 100% cotton t-shirt available in multiple colours. Comfortable everyday wear.",
         "price": 59900,        # ₹599.00
         "category": "clothing",
-        "image": "tshirt.jpg",
+        "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?w=600&auto=format&fit=crop&q=80",
         "stock": 100,
         "available": 1,
     },
@@ -81,7 +81,7 @@ SAMPLE_PRODUCTS = [
         "description": "Touch-controlled LED desk lamp with 5 brightness levels and USB charging port.",
         "price": 149900,       # ₹1,499.00
         "category": "home",
-        "image": "desk_lamp.jpg",
+        "image": "https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=600&auto=format&fit=crop&q=80",
         "stock": 30,
         "available": 1,
     },
@@ -90,7 +90,7 @@ SAMPLE_PRODUCTS = [
         "description": "Slim 10 000 mAh power bank with dual USB-A and USB-C output. Fast-charge supported.",
         "price": 129900,       # ₹1,299.00
         "category": "electronics",
-        "image": "power_bank.jpg",
+        "image": "https://images.unsplash.com/photo-1609091839311-d5365f9ff1c5?w=600&auto=format&fit=crop&q=80",
         "stock": 40,
         "available": 1,
     },
@@ -99,7 +99,7 @@ SAMPLE_PRODUCTS = [
         "description": "Double-wall vacuum-insulated 750 ml water bottle. Keeps drinks cold 24 h / hot 12 h.",
         "price": 89900,        # ₹899.00
         "category": "home",
-        "image": "water_bottle.jpg",
+        "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&auto=format&fit=crop&q=80",
         "stock": 60,
         "available": 1,
     },
@@ -108,7 +108,7 @@ SAMPLE_PRODUCTS = [
         "description": "Genuine leather bi-fold wallet with RFID-blocking technology and multiple card slots.",
         "price": 119900,       # ₹1,199.00
         "category": "accessories",
-        "image": "wallet.jpg",
+        "image": "https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&auto=format&fit=crop&q=80",
         "stock": 35,
         "available": 1,
     },
@@ -117,7 +117,7 @@ SAMPLE_PRODUCTS = [
         "description": "Lightweight mesh running shoes with cushioned sole. Ideal for daily jogs and gym workouts.",
         "price": 199900,       # ₹1,999.00
         "category": "clothing",
-        "image": "running_shoes.jpg",
+        "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
         "stock": 20,
         "available": 1,
     },
@@ -126,7 +126,7 @@ SAMPLE_PRODUCTS = [
         "description": "Ergonomic wireless optical mouse with adjustable DPI and silent click buttons.",
         "price": 69900,        # ₹699.00
         "category": "electronics",
-        "image": "wireless_mouse.jpg",
+        "image": "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=600&auto=format&fit=crop&q=80",
         "stock": 45,
         "available": 1,
     },
@@ -135,7 +135,7 @@ SAMPLE_PRODUCTS = [
         "description": "Set of 3 soy-wax scented candles – lavender, vanilla, and sandalwood. Burns 40 h each.",
         "price": 99900,        # ₹999.00
         "category": "home",
-        "image": "candle_set.jpg",
+        "image": "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=600&auto=format&fit=crop&q=80",
         "stock": 55,
         "available": 1,
     },
