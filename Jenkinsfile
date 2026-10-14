@@ -121,8 +121,8 @@ pipeline {
             steps {
                 echo '✅ Verifying application health …'
                 bat '''
-                    timeout /t 10 /nobreak >nul
-                    curl -sf http://localhost:5000/health || (echo Health check FAILED && exit 1)
+                    ping -n 8 127.0.0.1 >nul
+                    curl --retry 5 --retry-delay 2 --retry-connrefused -sf http://localhost:5000/health || (echo Health check FAILED && exit 1)
                     echo Application is healthy!
                 '''
             }
